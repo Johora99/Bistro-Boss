@@ -32,6 +32,11 @@ export default function Navbar() {
             <button>LOGIN</button>
             </Link>
            </li>
+           <li>
+            <Link to='/signUp'>
+            <button>SIGN UP</button>
+            </Link>
+           </li>
         </ul>
       </div>
       </div>

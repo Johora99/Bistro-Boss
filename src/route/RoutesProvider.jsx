@@ -4,6 +4,7 @@ import HomePage from "@/Pages/HomePage";
 import LoginPage from "@/Pages/LoginPage";
 import OurMenuPage from "@/Pages/OurMenuPage";
 import OurShopPage from "@/Pages/OurShopPage";
+import SignUpPage from "@/Pages/SignUpPage";
 import {Routes, Route } from "react-router";
 export default function RoutesProvider() {
   return (
@@ -14,6 +15,7 @@ export default function RoutesProvider() {
       <Route path="/ourShop" element={<OurShopPage></OurShopPage>}></Route>
       <Route path="/contactUs" element={<ContactUs></ContactUs>}></Route>
       <Route path="/logIn" element={<LoginPage></LoginPage>}></Route>
+      <Route path="/signUp" element={<SignUpPage></SignUpPage>}></Route>
       </Route>
     </Routes>
   )
