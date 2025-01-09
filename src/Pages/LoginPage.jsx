@@ -28,6 +28,7 @@ export default function LoginPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <img src={Img1} alt="" />
         <div className="inter">
+          <h3 className="text-center mb-5 text-darkGray text-4xl font-bold">Login</h3>
           <form onSubmit={handleLogin}>
             <div>
               <label className="form-control w-full ">

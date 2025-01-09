@@ -5,7 +5,21 @@ import { Link } from "react-router";
 import { FaGoogle } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { FaLongArrowAltLeft } from "react-icons/fa";
+import useAuth from "@/Hooks/useAuth";
+import { useForm } from "react-hook-form"
 export default function SignUpPage() {
+const {register,handleSubmit,formState: { errors },reset } = useForm()
+  const {creatUser} = useAuth();
+   const onSubmit = (data) => {
+      creatUser(data.email,data.password)
+      .then(res=>{
+        console.log(res)
+        reset()
+      }).catch(err=>{
+        console.log(err)
+      })
+    console.log(data)
+  }
   return (
     <BgImage bgImg={bgImg}>
     <div className="w-full h-screen flex items-center justify-center">
@@ -15,21 +29,27 @@ export default function SignUpPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-10">
       
         <div className="inter">
-          <form>
+          <h3 className="text-center mb-5 text-darkGray text-4xl font-bold">Sign Up</h3>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label className="form-control w-full ">
       <div className="label">
       <span className="label-text">Name</span>
      </div>
-      <input type="text" name="name" placeholder="Enter your name" className="input input-bordered formInput mb-5" />
+      <input type="text" {...register("name",{ required: true,maxLength: 20 })} name="name" placeholder="Enter your name" className="input input-bordered formInput" />
+      {errors.name && errors.name.type === 'required' && <span className=" text-red-500 mt-1 inline-block">Enter Your name</span>}
+      {
+        errors.name && errors.name.type === 'maxLength' && <span className=" text-red-500 mt-1 inline-block">Name should be a maximum of 20 characters</span>
+      }
      </label>
             </div>
             <div>
               <label className="form-control w-full ">
-      <div className="label">
+      <div className="label mt-5">
       <span className="label-text">Email</span>
      </div>
-      <input type="email" name="email" placeholder="Enter your email" className="input input-bordered formInput" />
+      <input type="email" {...register("email",{ required: true })} name="email" placeholder="Enter your email" className="input input-bordered formInput" />
+      {errors.email && <span className=" text-red-500 mt-1 inline-block">Enter Your email</span>}
      </label>
             </div>
             <div className="my-5">
@@ -37,7 +57,16 @@ export default function SignUpPage() {
       <div className="label">
       <span className="label-text">Password</span>
      </div>
-      <input type="password" name="password" placeholder="Enter your password" className="input input-bordered formInput" />
+      <input type="password" {...register("password",{required:true,minLength :{
+        value:8,
+        message:"Password must be at least 8 characters",
+      },pattern:{
+        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).+$/,
+        message :"Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+      }})} name="password" placeholder="Enter your password" className="input input-bordered formInput" />
+      {
+        errors.password && <span className=" text-red-500 mt-1 inline-block">{errors.password.message}</span>
+      }
      </label>
             </div>
             <div>
