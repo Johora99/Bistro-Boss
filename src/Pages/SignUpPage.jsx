@@ -1,19 +1,23 @@
 import BgImage from "@/ShareComponents/BgImage";
 import bgImg from '../assets/others/authentication.png'
 import Img1 from '../assets/others/authentication2.png'
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { FaGoogle } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import useAuth from "@/Hooks/useAuth";
 import { useForm } from "react-hook-form"
+import { toast } from "react-toastify";
 export default function SignUpPage() {
 const {register,handleSubmit,formState: { errors },reset } = useForm()
   const {creatUser} = useAuth();
+  const navigate = useNavigate();
    const onSubmit = (data) => {
       creatUser(data.email,data.password)
       .then(res=>{
         console.log(res)
+        toast.success('Sign Up Successfully')
+        navigate('/');
         reset()
       }).catch(err=>{
         console.log(err)

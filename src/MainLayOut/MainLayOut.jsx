@@ -1,8 +1,7 @@
 import Footer from "@/customComponents/Footer";
-import SignUpPage from "@/Pages/SignUpPage";
 import Navbar from "@/ShareComponents/Navbar";
 import { Outlet, useLocation } from "react-router";
-
+import { ToastContainer} from 'react-toastify';
 export default function MainLayOut() {
   const location = useLocation();
   const notNavFooter = location.pathname.includes('/logIn') || location.pathname.includes('/signUp')
@@ -16,6 +15,7 @@ export default function MainLayOut() {
       {
         notNavFooter || <Footer></Footer>
       }
+      <ToastContainer />
     </div>
   )
 }

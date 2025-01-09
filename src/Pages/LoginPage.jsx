@@ -6,19 +6,37 @@ import { Link } from "react-router";
 import { FaGoogle } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { loadCaptchaEnginge, LoadCanvasTemplate,validateCaptcha } from 'react-simple-captcha';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import useAuth from "@/Hooks/useAuth";
+import { toast } from "react-toastify";
 export default function LoginPage() {
+  const [disable,setDisable] = useState(true);
+  const {logInUser} = useAuth();
+  useEffect(()=>{
+  loadCaptchaEnginge(6); 
+
+  },[])
+  const handleValidCaptcha = (e)=>{
+    const captchaValue = e.target.value;
+    if(validateCaptcha(captchaValue)===true){
+      setDisable(false)
+    }else{
+      setDisable(true)
+    }
+  }
   const handleLogin = (e)=>{
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email,password)
+    logInUser(email,password)
+    .then(res=>{
+      toast.success('Login Successfully')
+    }).catch(err=>{
+      console.log(err)
+    })
   }
-  useEffect(()=>{
-    loadCaptchaEnginge(6); 
 
-  },[])
   return (
     <BgImage bgImg={bgImg}>
     <div className="w-full h-screen flex items-center justify-center">
@@ -50,10 +68,10 @@ export default function LoginPage() {
               <div>
                 < LoadCanvasTemplate/>
               </div>
-              <input type="text" name="captcha" placeholder="Type here" className="input input-bordered formInput my-5" />
+              <input type="text" name="captcha" onBlur={handleValidCaptcha} placeholder="Type here" className="input input-bordered formInput my-5" />
             </div>
             <div>
-              <button className="w-full py-3 bg-Tan bg-opacity-[0.7] text-white text-xl font-bold rounded-lg">Sign In</button>
+              <button className="w-full py-3 bg-Tan bg-opacity-[0.7] text-white text-xl font-bold rounded-lg disabled:bg-gray-200" disabled={disable}>Sign In</button>
             </div>
           </form>
           <div>

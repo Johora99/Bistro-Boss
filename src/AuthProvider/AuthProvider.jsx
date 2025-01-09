@@ -36,6 +36,7 @@ export default function AuthProvider({children}) {
     logInUser,
     handleSignOut,
     handleUpdate,
+    handleSignOut,
     user
   }
   return (
