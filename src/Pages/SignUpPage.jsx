@@ -1,7 +1,7 @@
 import BgImage from "@/ShareComponents/BgImage";
 import bgImg from '../assets/others/authentication.png'
 import Img1 from '../assets/others/authentication2.png'
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { FaGoogle } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { FaLongArrowAltLeft } from "react-icons/fa";
@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form"
 import { toast } from "react-toastify";
 export default function SignUpPage() {
 const {register,handleSubmit,formState: { errors },reset } = useForm()
-  const {creatUser} = useAuth();
+  const {creatUser,googleSignIn} = useAuth();
   const navigate = useNavigate();
    const onSubmit = (data) => {
       creatUser(data.email,data.password)
@@ -23,6 +23,15 @@ const {register,handleSubmit,formState: { errors },reset } = useForm()
         console.log(err)
       })
     console.log(data)
+  }
+  const handleGoogleSignIn = () =>{
+    googleSignIn()
+    .then(res=>{
+      toast.success('Sign Up Successfully')
+      navigate('/')
+    }).catch(err=>{
+      console.log(err)
+    })
   }
   return (
     <BgImage bgImg={bgImg}>
@@ -84,7 +93,7 @@ const {register,handleSubmit,formState: { errors },reset } = useForm()
           <div>
             <ul className="flex items-center justify-center gap-5">
             <li>
-          <Link className=" w-12 h-12 rounded-full border-[1px] border-dimGray relative flex items-center justify-center">
+          <Link onClick={handleGoogleSignIn} className=" w-12 h-12 rounded-full border-[1px] border-dimGray relative flex items-center justify-center">
            <FaGoogle className="text-dimGray text-2xl" />
           </Link>
          </li>

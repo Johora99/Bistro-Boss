@@ -2,7 +2,7 @@ import { FaLongArrowAltLeft } from "react-icons/fa";
 import bgImg from '../assets/others/authentication.png'
 import BgImage from "@/ShareComponents/BgImage";
 import Img1 from '../assets/others/authentication2.png'
-import { Link } from "react-router";
+import { Link, replace, useLocation, useNavigate } from "react-router";
 import { FaGoogle } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { loadCaptchaEnginge, LoadCanvasTemplate,validateCaptcha } from 'react-simple-captcha';
@@ -11,7 +11,10 @@ import useAuth from "@/Hooks/useAuth";
 import { toast } from "react-toastify";
 export default function LoginPage() {
   const [disable,setDisable] = useState(true);
-  const {logInUser} = useAuth();
+  const {logInUser,googleSignIn} = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || '/';
   useEffect(()=>{
   loadCaptchaEnginge(6); 
 
@@ -31,12 +34,21 @@ export default function LoginPage() {
     const password = form.password.value;
     logInUser(email,password)
     .then(res=>{
-      toast.success('Login Successfully')
+      toast.success('Login Successfully');
+      navigate(from ,{ replace:true})
     }).catch(err=>{
       console.log(err)
     })
   }
-
+   const handleGoogleSignIn = () =>{
+    googleSignIn()
+    .then(res=>{
+      toast.success('Login Successfully')
+      navigate(from ,{ replace:true})
+    }).catch(err=>{
+      console.log(err)
+    })
+  }
   return (
     <BgImage bgImg={bgImg}>
     <div className="w-full h-screen flex items-center justify-center">
@@ -81,7 +93,7 @@ export default function LoginPage() {
           <div>
             <ul className="flex items-center justify-center gap-5">
             <li>
-          <Link className=" w-12 h-12 rounded-full border-[1px] border-dimGray relative flex items-center justify-center">
+          <Link onClick={handleGoogleSignIn} className=" w-12 h-12 rounded-full border-[1px] border-dimGray relative flex items-center justify-center">
            <FaGoogle className="text-dimGray text-2xl" />
           </Link>
          </li>
