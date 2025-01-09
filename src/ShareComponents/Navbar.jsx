@@ -1,9 +1,11 @@
 import useAuth from "@/Hooks/useAuth";
 import { Link, NavLink, useNavigate } from "react-router";
 import cardImg from '../assets/icon/icons8-shopping-cart-100.png'
+import useCart from "@/Hooks/useCart";
 export default function Navbar() {
   const {user,handleSignOut} = useAuth();
   const navigate = useNavigate();
+  const {cart} = useCart();
   const signOut =()=>{
     handleSignOut()
     .then(res=>{
@@ -40,7 +42,7 @@ export default function Navbar() {
             <NavLink>
              <div className="relative">
                 <img src={cardImg} alt="" className="w-10"/>
-              <span className="absolute w-5 h-5 rounded-full top-1/2 left-6 bg-red-600 flex items-center justify-center text-sm">1</span>
+              <span className="absolute w-5 h-5 rounded-full top-1/2 left-6 bg-red-600 flex items-center justify-center text-sm">{cart.length}</span>
              </div>
             </NavLink>
           </li>
