@@ -8,31 +8,53 @@ import { FaLongArrowAltLeft } from "react-icons/fa";
 import useAuth from "@/Hooks/useAuth";
 import { useForm } from "react-hook-form"
 import { toast } from "react-toastify";
+import UseAxiosPublic from "@/Hooks/UseAxiosPublic";
 export default function SignUpPage() {
+  const axiosPublic = UseAxiosPublic();
 const {register,handleSubmit,formState: { errors },reset } = useForm()
-  const {creatUser,googleSignIn} = useAuth();
+  const {creatUser,googleSignIn,handleUpdate} = useAuth();
   const navigate = useNavigate();
    const onSubmit = (data) => {
       creatUser(data.email,data.password)
       .then(res=>{
-        console.log(res)
-        toast.success('Sign Up Successfully')
-        navigate('/');
-        reset()
+           const userInfo = {
+              user_name : data.name,
+              user_email : data.email,
+                }
+                axiosPublic.post('/user',userInfo)
+                .then(res=>{
+                  if(res.data?.insertedId){
+                    toast.success('Sign Up Successfully')
+                    navigate('/');
+                    reset();
+                  }
+                })
+      
+    
       }).catch(err=>{
         console.log(err)
       })
-    console.log(data)
   }
   const handleGoogleSignIn = () =>{
     googleSignIn()
     .then(res=>{
+     const userInfo = {
+              user_name : res.user?.displayName,
+              user_email : res.user?.email,
+                }
+                axiosPublic.post('/user',userInfo)
+                .then(res=>{
+                  if(res.data?.insertedId){
+                    
+                  }
+                })
       toast.success('Sign Up Successfully')
       navigate('/')
     }).catch(err=>{
       console.log(err)
     })
   }
+
   return (
     <BgImage bgImg={bgImg}>
     <div className="w-full h-screen flex items-center justify-center">

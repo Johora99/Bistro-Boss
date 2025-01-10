@@ -6,6 +6,7 @@ import HomePage from "@/Pages/HomePage";
 import LoginPage from "@/Pages/LoginPage";
 import OurMenuPage from "@/Pages/OurMenuPage";
 import OurShopPage from "@/Pages/OurShopPage";
+import PrivatePage from "@/Pages/PrivatePage";
 import SignUpPage from "@/Pages/SignUpPage";
 import {Routes, Route } from "react-router";
 export default function RoutesProvider() {
@@ -20,8 +21,8 @@ export default function RoutesProvider() {
       <Route path="/logIn" element={<LoginPage></LoginPage>}></Route>
       <Route path="/signUp" element={<SignUpPage></SignUpPage>}></Route>
       </Route>
-      <Route path="/dashBoard" element={<UserDashBoard></UserDashBoard>}>
-        <Route path="/dashBoard/cart" element={<Carts></Carts>}></Route>
+      <Route path="/dashBoard" element={<PrivatePage><UserDashBoard></UserDashBoard></PrivatePage>}>
+        <Route path="/dashBoard/cart" element={<PrivatePage><Carts></Carts></PrivatePage>}></Route>
       </Route>
     </Routes>
     </>

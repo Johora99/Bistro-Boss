@@ -20,9 +20,12 @@ export default {
 				goldenrod : 'rgb(205, 144, 3)',
 				raisinBlack : 'rgb(17, 24, 39)',
 				Tan : 'rgb(209, 160, 84)',
+				grayLight : 'rgb(246, 246, 246)',
+				darkRed : 'rgb(185, 28, 28)',
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"),
+	require('daisyui'),]
 }
 

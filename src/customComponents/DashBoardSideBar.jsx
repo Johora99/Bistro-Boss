@@ -10,15 +10,46 @@ import { IoMenu } from "react-icons/io5";
 import { GiShoppingBag } from "react-icons/gi";
 import { FaEnvelope } from "react-icons/fa";
 export default function DashBoardSideBar() {
+ const isAdmin = true ;
   return (
     <div>
-      <div className='min-h-screen bg-Tan p-10 cinzel'>
+      <div className='p-10 cinzel'>
         <div>
         <h2 className="text-2xl font-black">BISTRO BOSS</h2>
         <p className="text-lg font-bold tracking-[6px]">Restaurant</p>
       </div>
       <div className='mt-20'>
-        <ul className=''>
+        {
+          isAdmin ? <>
+             <ul className=''>
+          <li className='dashboard-nav'>
+            <AiFillHome className='text-xl'/>
+            <NavLink>Admin Home</NavLink>
+          </li>
+          <li className='dashboard-nav'>
+            <FaCalendarDays className='text-xl'/>
+            <NavLink>add items</NavLink>
+          </li>
+          <li className='dashboard-nav'>
+            <FaMoneyCheck className='text-xl'/>
+            <NavLink>manage items</NavLink>
+          </li>
+          <li className='dashboard-nav'>
+            <FaShoppingCart className='text-xl'/>
+            <NavLink className='dashboard-nav'>Manage bookings</NavLink>
+          </li>
+          <li className='dashboard-nav'>
+            <PiListStarFill className='text-xl'/>
+            <NavLink>all users</NavLink>
+          </li>
+          <li className='dashboard-nav'>
+            <MdBookmarkAdded className='text-xl'/>
+            <NavLink>my booking</NavLink>
+          </li>
+        </ul>
+          </> :
+          <>
+             <ul className=''>
           <li className='dashboard-nav'>
             <AiFillHome className='text-xl'/>
             <NavLink>User Home</NavLink>
@@ -33,7 +64,7 @@ export default function DashBoardSideBar() {
           </li>
           <li className='dashboard-nav'>
             <FaShoppingCart className='text-xl'/>
-            <NavLink>my cart</NavLink>
+            <NavLink to='/dashBoard/cart' className={({isActive}) => isActive && 'text-white'}>my cart</NavLink>
           </li>
           <li className='dashboard-nav'>
             <PiListStarFill className='text-xl'/>
@@ -44,13 +75,16 @@ export default function DashBoardSideBar() {
             <NavLink>my booking</NavLink>
           </li>
         </ul>
+          </>
+        }
+      
       </div>
       <div className='border-b-[1px] border-white w-full my-10'></div>
       <div>
         <ul>
           <li className='dashboard-nav'>
             <AiFillHome className='text-xl'/>
-            <NavLink>Home</NavLink>
+            <NavLink to='/'>Home</NavLink>
           </li>
           <li className='dashboard-nav'>
             <IoMenu className='text-xl'/>

@@ -30,7 +30,7 @@ export default function Navbar() {
             <NavLink to='/contactUs' className={({isActive}) => isActive && 'text-yellowGreen'}>CONTACT US</NavLink>
           </li>
           <li>
-            <NavLink>DASHBOARD</NavLink>
+            <NavLink to='/dashBoard' className={({isActive}) => isActive && 'text-yellowGreen'}>DASHBOARD</NavLink>
           </li>
           <li>
             <NavLink to='/ourMenu' className={({isActive}) => isActive && 'text-yellowGreen'}>OUR MENU</NavLink>

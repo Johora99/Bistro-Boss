@@ -9,7 +9,9 @@ import { loadCaptchaEnginge, LoadCanvasTemplate,validateCaptcha } from 'react-si
 import { useEffect, useState } from "react";
 import useAuth from "@/Hooks/useAuth";
 import { toast } from "react-toastify";
+import UseAxiosPublic from "@/Hooks/UseAxiosPublic";
 export default function LoginPage() {
+  const axiosPublic = UseAxiosPublic();
   const [disable,setDisable] = useState(true);
   const {logInUser,googleSignIn} = useAuth();
   const location = useLocation();
@@ -40,9 +42,21 @@ export default function LoginPage() {
       console.log(err)
     })
   }
-   const handleGoogleSignIn = () =>{
+     const handleGoogleSignIn = () =>{
     googleSignIn()
     .then(res=>{
+      console.log(res.user.displayName)
+     const userInfo = {
+              user_name : res.user?.displayName,
+              user_email : res.user?.email,
+                }
+                axiosPublic.post('/user',userInfo)
+                .then(res=>{
+                  console.log(res.data)
+                  if(res.data?.insertedId){
+                    
+                  }
+                })
       toast.success('Login Successfully')
       navigate(from ,{ replace:true})
     }).catch(err=>{
