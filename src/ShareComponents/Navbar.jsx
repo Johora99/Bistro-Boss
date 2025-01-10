@@ -41,8 +41,10 @@ export default function Navbar() {
           <li>
             <NavLink>
              <div className="relative">
+                <Link to='/dashBoard/cart'>
                 <img src={cardImg} alt="" className="w-10"/>
               <span className="absolute w-5 h-5 rounded-full top-1/2 left-6 bg-red-600 flex items-center justify-center text-sm">{cart.length}</span>
+                </Link>
              </div>
             </NavLink>
           </li>

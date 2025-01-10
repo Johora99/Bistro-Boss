@@ -38,7 +38,6 @@ export default function AuthProvider({children}) {
   const allInfo = {
     creatUser,
     logInUser,
-    handleSignOut,
     handleUpdate,
     handleSignOut,
     googleSignIn,

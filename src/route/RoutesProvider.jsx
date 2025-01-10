@@ -1,3 +1,5 @@
+import Carts from "@/customComponents/Carts";
+import UserDashBoard from "@/DashBoard/UserDashBoard";
 import MainLayOut from "@/MainLayOut/MainLayOut";
 import ContactUs from "@/Pages/ContactUs";
 import HomePage from "@/Pages/HomePage";
@@ -8,6 +10,7 @@ import SignUpPage from "@/Pages/SignUpPage";
 import {Routes, Route } from "react-router";
 export default function RoutesProvider() {
   return (
+    <>
       <Routes>
       <Route path="/" element={<MainLayOut></MainLayOut>}>
       <Route index element={<HomePage></HomePage>}></Route>
@@ -17,6 +20,11 @@ export default function RoutesProvider() {
       <Route path="/logIn" element={<LoginPage></LoginPage>}></Route>
       <Route path="/signUp" element={<SignUpPage></SignUpPage>}></Route>
       </Route>
+      <Route path="/dashBoard" element={<UserDashBoard></UserDashBoard>}>
+        <Route path="/dashBoard/cart" element={<Carts></Carts>}></Route>
+      </Route>
     </Routes>
+    </>
+    
   )
 }
