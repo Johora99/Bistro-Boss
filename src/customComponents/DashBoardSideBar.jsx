@@ -9,6 +9,10 @@ import { MdBookmarkAdded } from "react-icons/md";
 import { IoMenu } from "react-icons/io5";
 import { GiShoppingBag } from "react-icons/gi";
 import { FaEnvelope } from "react-icons/fa";
+import { FaUtensils } from "react-icons/fa";
+import { TfiMenuAlt } from "react-icons/tfi";
+import { FaBook } from "react-icons/fa";
+import { IoIosPeople } from "react-icons/io";
 export default function DashBoardSideBar() {
  const isAdmin = true ;
   return (
@@ -27,24 +31,20 @@ export default function DashBoardSideBar() {
             <NavLink>Admin Home</NavLink>
           </li>
           <li className='dashboard-nav'>
-            <FaCalendarDays className='text-xl'/>
+            <FaUtensils className='text-xl'/>
             <NavLink>add items</NavLink>
           </li>
           <li className='dashboard-nav'>
-            <FaMoneyCheck className='text-xl'/>
+            <TfiMenuAlt className='text-xl'/>
             <NavLink>manage items</NavLink>
           </li>
           <li className='dashboard-nav'>
-            <FaShoppingCart className='text-xl'/>
+            <FaBook className='text-xl'/>
             <NavLink className='dashboard-nav'>Manage bookings</NavLink>
           </li>
           <li className='dashboard-nav'>
-            <PiListStarFill className='text-xl'/>
-            <NavLink>all users</NavLink>
-          </li>
-          <li className='dashboard-nav'>
-            <MdBookmarkAdded className='text-xl'/>
-            <NavLink>my booking</NavLink>
+          <IoIosPeople className='text-xl'/>
+            <NavLink to='/dashBoard/allUser' className={({isActive}) => isActive && 'text-white'}>all users</NavLink>
           </li>
         </ul>
           </> :

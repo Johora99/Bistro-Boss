@@ -1,3 +1,4 @@
+import AllUsers from "@/customComponents/AllUsers";
 import Carts from "@/customComponents/Carts";
 import UserDashBoard from "@/DashBoard/UserDashBoard";
 import MainLayOut from "@/MainLayOut/MainLayOut";
@@ -23,6 +24,8 @@ export default function RoutesProvider() {
       </Route>
       <Route path="/dashBoard" element={<PrivatePage><UserDashBoard></UserDashBoard></PrivatePage>}>
         <Route path="/dashBoard/cart" element={<PrivatePage><Carts></Carts></PrivatePage>}></Route>
+        {/* Admin routes */}
+        <Route path="/dashBoard/allUser" element={<PrivatePage><AllUsers></AllUsers></PrivatePage>}></Route>
       </Route>
     </Routes>
     </>

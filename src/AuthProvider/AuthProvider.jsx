@@ -41,6 +41,7 @@ export default function AuthProvider({children}) {
     handleUpdate,
     handleSignOut,
     googleSignIn,
+    loading,
     user
   }
   return (
