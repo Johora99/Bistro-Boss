@@ -1,7 +1,9 @@
+import AddItems from "@/customComponents/AddItems";
 import AllUsers from "@/customComponents/AllUsers";
 import Carts from "@/customComponents/Carts";
 import UserDashBoard from "@/DashBoard/UserDashBoard";
 import MainLayOut from "@/MainLayOut/MainLayOut";
+import AdminPrivatePage from "@/Pages/AdminPrivatePage";
 import ContactUs from "@/Pages/ContactUs";
 import HomePage from "@/Pages/HomePage";
 import LoginPage from "@/Pages/LoginPage";
@@ -25,7 +27,8 @@ export default function RoutesProvider() {
       <Route path="/dashBoard" element={<PrivatePage><UserDashBoard></UserDashBoard></PrivatePage>}>
         <Route path="/dashBoard/cart" element={<PrivatePage><Carts></Carts></PrivatePage>}></Route>
         {/* Admin routes */}
-        <Route path="/dashBoard/allUser" element={<PrivatePage><AllUsers></AllUsers></PrivatePage>}></Route>
+        <Route path="/dashBoard/allUser" element={<AdminPrivatePage><AllUsers></AllUsers></AdminPrivatePage>}></Route>
+        <Route path="/dashBoard/addItems" element={<AdminPrivatePage><AddItems></AddItems></AdminPrivatePage>}></Route>
       </Route>
     </Routes>
     </>

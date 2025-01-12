@@ -17,7 +17,6 @@ import useAdmin from '@/Hooks/useAdmin';
 
 export default function DashBoardSideBar() {
   const {isAdmin} = useAdmin();
-  console.log(isAdmin)
   return (
     <div>
       <div className='p-10 cinzel'>
@@ -35,7 +34,7 @@ export default function DashBoardSideBar() {
           </li>
           <li className='dashboard-nav'>
             <FaUtensils className='text-xl'/>
-            <NavLink>add items</NavLink>
+            <NavLink to='/dashBoard/addItems' className={({isActive}) => isActive && 'text-white'}>add items</NavLink>
           </li>
           <li className='dashboard-nav'>
             <TfiMenuAlt className='text-xl'/>
