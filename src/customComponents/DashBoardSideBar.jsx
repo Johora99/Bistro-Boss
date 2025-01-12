@@ -13,8 +13,11 @@ import { FaUtensils } from "react-icons/fa";
 import { TfiMenuAlt } from "react-icons/tfi";
 import { FaBook } from "react-icons/fa";
 import { IoIosPeople } from "react-icons/io";
+import useAdmin from '@/Hooks/useAdmin';
+
 export default function DashBoardSideBar() {
- const isAdmin = true ;
+  const {isAdmin} = useAdmin();
+  console.log(isAdmin)
   return (
     <div>
       <div className='p-10 cinzel'>
@@ -24,7 +27,7 @@ export default function DashBoardSideBar() {
       </div>
       <div className='mt-20'>
         {
-          isAdmin ? <>
+         isAdmin ? <>
              <ul className=''>
           <li className='dashboard-nav'>
             <AiFillHome className='text-xl'/>
